@@ -9,8 +9,8 @@ FROM yantis/archlinux-tiny
 MAINTAINER Stefan Kemnitz <kemnitz.stefan@googlemail.com>
 
 # Update and force a refresh of all package lists even if they appear up to date.
-RUN pacman -Syyu --noconfirm && \ 
-    pacman --noconfirm -S vim subversion cmake gcc make python grep sed
+RUN pacman -Syy --noconfirm && \ 
+    pacman --noconfirm --force -S db gcc vim subversion cmake make python grep sed
 
     # get a clang install
 RUN cd ~ && \
@@ -27,5 +27,5 @@ RUN cd ~ && \
     mkdir build && \
     cd build && \
     cmake -G "Unix Makefiles" ../llvm && \
-    make 
+    make  -j 16
 
